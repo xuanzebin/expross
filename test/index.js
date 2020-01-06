@@ -20,26 +20,31 @@ const router = express.Router()
 //   console.log('Time:', Date.now());
 // });
 
-app.use(function(req, res, next) {
-  console.log('Time：', Date.now());
-  next();
-});
+// app.use(function(req, res, next) {
+//   console.log('Time：', Date.now());
+//   next();
+// });
 
 app.get('/', function(req, res, next) {
+  throw new Error('hi')
   res.send('first');
 });
+app.use(function(err, req, res, next) {
+  console.log(err, '123')
+  res.send('error')
+})
 
 
-router.use(function(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
+// router.use(function(req, res, next) {
+//   console.log('Time: ', Date.now());
+//   next();
+// });
 
-router.use('/1', function(req, res, next) {
-  res.send('second');
-});
+// router.use('/1', function(req, res, next) {
+//   res.send('second');
+// });
 
-app.use('/user', router);
+// app.use('/user', router);
 
 app.listen(3000, function() {
   console.log('Example app listening on port 3000!');
